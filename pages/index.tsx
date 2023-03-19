@@ -90,7 +90,7 @@ const Stake: NextPage = () => {
             <br/>
             <br/>This can be a great way to give your jelly 
             companion a sense of purpose and responsibility. 
-            <br/>Just make sure to monitor their workload and make sure they don't get overwhelmed!
+            <br/>Just make sure to monitor their workload and make sure they dont get overwhelmed!
             
           </h3>
           <div className={styles.tokenGrid}>
