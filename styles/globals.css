@@ -1,24 +1,44 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
-a {
-  color: #7dd3fc;
-  text-decoration: none;
-}
-
-* {
+/* Box sizing rules */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-html {
-  color-scheme: dark;
-}
+/* Set core body defaults */
 body {
-  color: #e7e8e8;
-  background: #0f1318;
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  padding-bottom: 120px;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+:root {
+  --black: #0b0216;
+  --white: #469954;
+  --tw-color1: #783daf;
+  --tw-color1-hover: #8400ff;
+}
+
+body {
+  background: var(--black);
+  font-family: "Inter", sans-serif;
+  color: var(--white);
+  display: flex;
+  margin: 1;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2.2rem;
 }
