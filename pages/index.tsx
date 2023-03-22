@@ -89,7 +89,7 @@ const Stake: NextPage = () => {
             better earning potential, and reward. 
             <br/>
             <br/>This can be a great way to give your jelly 
-            companion a sense of purpose and responsibility. 
+            companion a sense of purpose and responsibility. <br/>
             <br/>Just make sure to monitor their workload and make sure they dont get overwhelmed!
             
           </h3>
