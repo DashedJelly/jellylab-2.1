@@ -7,7 +7,8 @@ import {
   useOwnedNFTs,
   useTokenBalance,
   Web3Button,
-  useNFTCollection
+  useNFTCollection,
+  MediaRenderer
 } from "@thirdweb-dev/react";
 import { NFTCollection } from "@thirdweb-dev/sdk";
 import { BigNumber, ethers } from "ethers";
@@ -66,7 +67,12 @@ const Stake: NextPage = () => {
   }
 
   if (isLoading) {
-    return <div>Loading....</div>;
+    return <div>
+      <center><h1 className={styles.center}><MediaRenderer src="ipfs://QmQv2duGBZq6G88u2V
+      
+      /Dashed_Jelly_sci-fi_mad_scientist_lab_with_jelly_wads_and_fungu_1e004539-2367-4d97-a963-09efb1b61434.png" 
+      width="2400" height="1200"
+     /></h1></center></div>;
   }
   function App() {
     return <ConnectWallet />;
@@ -79,7 +85,7 @@ const Stake: NextPage = () => {
             <ConnectWallet />
       {!address ? (
         <div>
-      
+       
         </div>
       ) : (
         <>
