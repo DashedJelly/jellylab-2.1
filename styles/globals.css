@@ -13,6 +13,7 @@ body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   padding-bottom: 120px;
+  
 }
 
 /* Inherit fonts for inputs and buttons */
@@ -24,15 +25,15 @@ select {
 }
 
 :root {
-  --black: #0b0216;
-  --white: #469954;
-  --tw-color1: #783daf;
-  --tw-color1-hover: #8400ff;
+  --black: #1f2638;
+  --white: #32a4b8;
+  --tw-color1: #393141;
+  --tw-color1-hover: #0b2b5a;
 }
 
 body {
   background: var(--black);
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", monospace, Verdana, Geneva, Tahoma, sans-serif;
   color: var(--white);
   display: flex;
   margin: 1;

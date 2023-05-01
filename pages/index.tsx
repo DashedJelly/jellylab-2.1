@@ -7,7 +7,9 @@ import {
   useOwnedNFTs,
   useTokenBalance,
   Web3Button,
-  useNFTCollection
+  useNFTDropContractAddress,
+  MediaRenderer
+
 } from "@thirdweb-dev/react";
 import { NFTCollection } from "@thirdweb-dev/sdk";
 import { BigNumber, ethers } from "ethers";
@@ -15,7 +17,7 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import NFTCard from "../components/NFTCard";
 import {
-  nftCollectionAddress,
+  nftDropAddress,
   stakingContractAddress,
   tokenContractAddress,
 } from "../consts/contactAddresses";
@@ -24,7 +26,7 @@ import styles from "../styles/Home.module.css";
 const Stake: NextPage = () => {
   const address = useAddress();
   const { contract: useNFTCollection } = useContract(
-    nftCollectionAddress,
+    nftDropAddress,
     "nft-collection"
   );
   const { contract: tokenContract } = useContract(
@@ -32,7 +34,7 @@ const Stake: NextPage = () => {
     "token"
   );
   const { contract, isLoading } = useContract(stakingContractAddress);
-  const { data: ownedNfts } = useOwnedNFTs(useNFTCollection, address);
+  const { data: ownedNfts } = useOwnedNFTs(useNFTDropContractAddress, address);
   const { data: tokenBalance } = useTokenBalance(tokenContract, address);
   const [claimableRewards, setClaimableRewards] = useState<BigNumber>();
   const { data: stakedTokens } = useContractRead(
@@ -66,36 +68,40 @@ const Stake: NextPage = () => {
   }
 
   if (isLoading) {
-    return <div>Loading....</div>;
+    return <div>
+      <center><h1 className={styles.center}>LOADING.....
+</h1></center></div>;
   }
   function App() {
     return <ConnectWallet />;
   }
   return (
     <div className={styles.container}>
-      <h1 className={styles.h1}>Welcome To Jelly LabZ 2.1</h1>
+      <h1 className={styles.nftBoxGrid}><MediaRenderer src="https://ipfs.thirdwebcdn.com/ipfs/QmaFsijetNjokyHEis9dVwed6aQPDSZbiXZT6AKoNrYk2W/JellyGoonZ%20Banner.png" width="300"
+     /></h1>
       <hr className={`${styles.divider} ${styles.spacerTop}`} />
-      <br/>
+      
             <ConnectWallet />
       {!address ? (
         <div>
-      
+     
         </div>
       ) : (
         <>
-          <h3 className={styles.h3}>Sending your Jelly companion to work in the labs can be a great way to earn some extra $Jelly. 
-            <br/>Each hour your jelly companion completes a task, they earn one jelly token. 
-            <br/>On occasion when targets are hit more tokens can be sent per hour, providing even 
-            better earning potential, and reward. 
-            <br/>
-            <br/>This can be a great way to give your jelly 
-            companion a sense of purpose and responsibility. 
-            <br/>Just make sure to monitor their workload and make sure they don't get overwhelmed!
-            
+        
+        <h1 className={styles.h1}>
+          <br/>
+       The JellyGoonZ : Capture Reward System 
+       </h1>
+       <hr className={`${styles.divider} ${styles.spacerbottom}`} />
+       <h3 className={styles.h3}>
+       Contract Address : 0x8d4fC6951E8C3a8e37486D994Db986Cc11AA05A8
+       <hr className={`${styles.divider} ${styles.spacerTop}`} />
+       
           </h3>
           <div className={styles.tokenGrid}>
             <div className={styles.tokenItem}>
-              <h3 className={styles.tokenLabel}>Claimable $JELLY</h3>
+              <h3 className={styles.tokenLabel}>$JELLY Earned</h3>
               <p className={styles.tokenValue}>
                 <b>
                   {!claimableRewards
@@ -117,11 +123,11 @@ const Stake: NextPage = () => {
             action={(contract) => contract.call("claimRewards")}
             contractAddress={stakingContractAddress}
           >
-            Claim Earnings
+            Claim Rewards
           </Web3Button>
 
           <hr className={`${styles.divider} ${styles.spacerTop}`} />
-          <h2>Send Home</h2>
+          <h2>Set Free</h2>
           <div className={styles.nftBoxGrid}>
             {stakedTokens &&
               stakedTokens[0]?.map((stakedToken: BigNumber) => (
@@ -134,7 +140,7 @@ const Stake: NextPage = () => {
           </div>
 
           <hr className={`${styles.divider} ${styles.spacerTop}`} />
-          <h2>Available to work</h2>
+          <h2>Captured</h2>
           <div className={styles.nftBoxGrid}>
             {ownedNfts?.map((nft) => (
               <div className={styles.nftBox} key={nft.metadata.id.toString()}>
