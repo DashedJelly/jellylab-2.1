@@ -5,7 +5,7 @@ import {
   useAddress,
   useContract,
   useContractRead,
-  useNFTCollection,
+  useNFT,
   useOwnedNFTs,
   useTokenBalance,
   Web3Button,
@@ -23,6 +23,8 @@ import {
 import styles from "../styles/Home.module.css";
 import { NFTDropContractInput } from "@thirdweb-dev/sdk/solana";
 import { NFTDrop } from "@thirdweb-dev/sdk/evm";
+
+const [claimableRewards, setClaimableRewards] = useState<BigNumber>();
 
 const Stake: NextPage = () => {
   const address = useAddress();
@@ -63,14 +65,15 @@ const Stake: NextPage = () => {
       stakingContractAddress
     );
     if (!isApproved) {
-      await nftDropContractAddress?.setApprovalForAll(stakingContractAddress, true);
+      await ?.setApprovalForAll(stakingContractAddress, true);
     }
     await contract?.call("stake", [id]);
   }
 
   if (isLoading) {
     return <div>
-      <center><h1 className={styles.center}>Loading......</h1></center></div>;
+      <center><h1 className={styles.center}><MediaRenderer src="ipfs://QmQv2duGBZq6G88u2V68pjgushTeXMP15jPoTzUxwYgzyH/Dashed_Jelly_sci-fi_mad_scientist_lab_with_jelly_wads_and_fungu_1e004539-2367-4d97-a963-09efb1b61434.png" width="2400" height="1200"
+     /></h1></center></div>;
   }
   function App() {
     return <ConnectWallet />;
