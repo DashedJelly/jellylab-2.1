@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@coinbase/wallet-sdk": "^3.6.4",
-    "@thirdweb-dev/react": "^3.9.0",
-    "@thirdweb-dev/sdk": "^3.9.0",
+    "@thirdweb-dev/react": "^3.14.8",
+    "@thirdweb-dev/sdk": "^3.10.28",
     "@walletconnect/web3wallet": "^1.5.0",
     "ethers": "^5.7.2",
     "next": "^13",
@@ -28,5 +28,4 @@
     "eslint-config-next": "^13",
     "typescript": "^4.9.4"
   }
-
 }
