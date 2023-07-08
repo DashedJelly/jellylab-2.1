@@ -1,53 +1,54 @@
 import {
   ConnectWallet,
+  MediaRenderer,
   ThirdwebNftMedia,
   useAddress,
   useContract,
   useContractRead,
+  useNFTCollection,
   useOwnedNFTs,
   useTokenBalance,
   Web3Button,
-  useNFTDropContractAddress,
-  MediaRenderer
-
+  
 } from "@thirdweb-dev/react";
-import { NFTCollection } from "@thirdweb-dev/sdk";
 import { BigNumber, ethers } from "ethers";
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import NFTCard from "../components/NFTCard";
 import {
-  nftDropAddress,
+  nftDropContractAddress,
   stakingContractAddress,
   tokenContractAddress,
 } from "../consts/contactAddresses";
 import styles from "../styles/Home.module.css";
+import { NFTDropContractInput } from "@thirdweb-dev/sdk/solana";
+import { NFTDrop } from "@thirdweb-dev/sdk/evm";
 
 const Stake: NextPage = () => {
   const address = useAddress();
-  const { contract: useNFTCollection } = useContract(
-    nftDropAddress,
-    "nft-collection"
+  const { contract: contractAddress } = useContract(
+    nftDropContractAddress,
+    "nftdrop"
   );
   const { contract: tokenContract } = useContract(
     tokenContractAddress,
     "token"
   );
   const { contract, isLoading } = useContract(stakingContractAddress);
-  const { data: ownedNfts } = useOwnedNFTs(useNFTDropContractAddress, address);
-  const { data: tokenBalance } = useTokenBalance(tokenContract, address);
+  const { data: ownedNfts } = useOwnedNFTs("nftdrop", "0x1db022332b4DA18863660C96bD5b5dbe16F9D6f5" );
+  const { data: tokenBalance } = useTokenBalance("token", "0xbb71538BB1db7c2C8C5bD78D1b443e440b697d66");
   const [claimableRewards, setClaimableRewards] = useState<BigNumber>();
   const { data: stakedTokens } = useContractRead(
     contract,
-    "getStakeInfo",
-    address
+    "getStakeInfo"
   );
 
+  
   useEffect(() => {
     if (!contract || !address) return;
 
     async function loadClaimableRewards() {
-      const stakeInfo = await contract?.call("getStakeInfo", address);
+      const stakeInfo = await contract?.call("0x8d4fC6951E8C3a8e37486D994Db986Cc11AA05A8");
       setClaimableRewards(stakeInfo[1]);
     }
 
@@ -57,51 +58,41 @@ const Stake: NextPage = () => {
   async function stakeNft(id: string) {
     if (!address) return;
 
-    const isApproved = await useNFTCollection?.isApproved(
+    const isApproved = await contract?.isApproved(
       address,
       stakingContractAddress
     );
     if (!isApproved) {
-      await useNFTCollection?.setApprovalForAll(stakingContractAddress, true);
+      await nftDropContractAddress?.setApprovalForAll(stakingContractAddress, true);
     }
     await contract?.call("stake", [id]);
   }
 
   if (isLoading) {
     return <div>
-      <center><h1 className={styles.center}>LOADING.....
-</h1></center></div>;
+      <center><h1 className={styles.center}>Loading......</h1></center></div>;
   }
   function App() {
     return <ConnectWallet />;
   }
   return (
     <div className={styles.container}>
-      <h1 className={styles.nftBoxGrid}><MediaRenderer src="https://ipfs.thirdwebcdn.com/ipfs/QmaFsijetNjokyHEis9dVwed6aQPDSZbiXZT6AKoNrYk2W/JellyGoonZ%20Banner.png" width="300"
-     /></h1>
+      <h1 className={styles.h1}>JellyGoonZ Capture Reward System</h1>
       <hr className={`${styles.divider} ${styles.spacerTop}`} />
-      
+      <br/>
             <ConnectWallet />
       {!address ? (
         <div>
-     
+      
         </div>
       ) : (
         <>
-        
-        <h1 className={styles.h1}>
-          <br/>
-       The JellyGoonZ : Capture Reward System 
-       </h1>
-       <hr className={`${styles.divider} ${styles.spacerbottom}`} />
-       <h3 className={styles.h3}>
-       Contract Address : 0x8d4fC6951E8C3a8e37486D994Db986Cc11AA05A8
-       <hr className={`${styles.divider} ${styles.spacerTop}`} />
-       
+          <h3 className={styles.h3}>Sending your Jelly companion to work 
+            
           </h3>
           <div className={styles.tokenGrid}>
             <div className={styles.tokenItem}>
-              <h3 className={styles.tokenLabel}>$JELLY Earned</h3>
+              <h3 className={styles.tokenLabel}>Claimable $JELLY</h3>
               <p className={styles.tokenValue}>
                 <b>
                   {!claimableRewards
@@ -123,11 +114,11 @@ const Stake: NextPage = () => {
             action={(contract) => contract.call("claimRewards")}
             contractAddress={stakingContractAddress}
           >
-            Claim Rewards
+            Claim Earnings
           </Web3Button>
 
           <hr className={`${styles.divider} ${styles.spacerTop}`} />
-          <h2>Set Free</h2>
+          <h2>Send Home</h2>
           <div className={styles.nftBoxGrid}>
             {stakedTokens &&
               stakedTokens[0]?.map((stakedToken: BigNumber) => (
@@ -140,7 +131,7 @@ const Stake: NextPage = () => {
           </div>
 
           <hr className={`${styles.divider} ${styles.spacerTop}`} />
-          <h2>Captured</h2>
+          <h2>Available to work</h2>
           <div className={styles.nftBoxGrid}>
             {ownedNfts?.map((nft) => (
               <div className={styles.nftBox} key={nft.metadata.id.toString()}>

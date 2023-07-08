@@ -7,7 +7,8 @@
   width: 100%;
   position: absolute;
   padding: 0 20px;
-  font-family: 'Courier New', Courier, monospace;
+  padding: 0 20px;
+  font-family: 'Courier New', Courier;
 }
 
 .h1 {
@@ -21,13 +22,13 @@
 
 .divider {
   width: 70%;
-  border-color: rgb(42, 177, 182);
+  border-color: rgb(103, 12, 189);
   opacity: 0.5;
 }
 
 .smallDivider {
   width: 35%;
-  border-color: rgb(9, 182, 38);
+  border-color: rgb(98, 9, 182);
   margin-top: 64px;
   opacity: 0.25;
 }
@@ -74,7 +75,7 @@
 }
 
 .selectBoxDescription {
-  color: rgba(91, 8, 168, 0.9);
+  color: rgba(77, 196, 130, 0.9);
   margin-top: 1px;
 }
 
@@ -122,7 +123,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 3px solid rgba(68, 6, 236, 0.4);
+  border: 3px solid rgba(16, 170, 119, 0.4);
   gap: 16px;
 }
 
@@ -130,7 +131,7 @@
   margin-top: 9px;
   margin-bottom: 0px;
   font-weight: 600;
-  color: rgba(18, 168, 12, 0.7);
+  color: rgba(161, 28, 238, 0.7);
 }
 
 /* Second tokenLabel item */
